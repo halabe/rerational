@@ -6,17 +6,9 @@ import React from 'react';
 require('styles/Rational.css');
 
 let RationalComponent = (props) => {
-    let value = props.value;
-    let sign = (value.sign() < 0)? '-' : '';
-    let absNum = Math.abs(value.num);
-    let absDen = Math.abs(value.den);
-    
-    let whole = Math.floor(absNum/absDen);
-    let remain = absNum%absDen;
-    whole = (whole)? whole : (remain)? '' : '0';
-    
-    let wholeJsx = <span>{sign}{whole || ''}</span>
-    let fractJsx = (remain)? <span><sup><small>{remain}</small></sup>&frasl;<sub><small>{absDen}</small></sub></span> : null
+    let c = props.value.stringComponents();
+    let wholeJsx = <span>{c.sign}{c.whole}</span>
+    let fractJsx = (c.frac)? <span><sup><small>{c.num}</small></sup>&frasl;<sub><small>{c.den}</small></sub></span> : null
     return <span className="square" onClick={props.onClick} >{wholeJsx} {fractJsx}</span>;
 };
 

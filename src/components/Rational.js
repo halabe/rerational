@@ -65,5 +65,21 @@ class Rational {
     lt(rat) {
         return this.sub(rat).num < 0;
     }
+    stringComponents() {
+        let abs = this.abs();
+        let whole = Math.floor(abs.num / abs.den);
+        let remain = abs.num % abs.den;
+        return {
+            sign: (this.sign() < 0)? '-' : '',
+            whole: (whole)? whole+'' : (remain)? '' : '0',
+            frac: remain>0,
+            num:remain+'',
+            den: abs.den+''
+        };
+    }
+    toString() {
+        let c = this.stringComponents();
+        return c.sign + c.whole + ((c.frac)? ' ' + c.num + '/' + c.den : '');
+    }
 }
 export default Rational;
