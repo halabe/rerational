@@ -8,22 +8,21 @@ import RationalComponent from './RationalComponent';
 
 
 class MatrixComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { mat: props.mat, focus: [-1,-1] };
+  constructor() {
+    super();
+    this.state = { focus: [-1,-1] };
   }
   onClick(i, j) {
-    //console.log([i,j]);
     this.setState({ focus:[i,j] });
   }
   hasFocus(i,j) {
     return this.state.focus[0]===i && this.state.focus[1]===j;
   }
   renderStatic(i,j,v) {
-    return (<div key={j} ><RationalComponent value={v} onClick={this.onClick.bind(this, i, j)} /></div>);
+      return (<div key={j} ><RationalComponent value={v} onClick={this.onClick.bind(this, i, j)} /></div>);
   }
   render() {
-    const rows = this.state.mat.rows.map((rv,i) => {
+    const rows = this.props.mat.rows.map((rv,i) => {
         let cols = rv.v.map((v,j) => this.renderStatic(i,j,v));
         return <div className='row' key={i} >{cols}</div>
     });

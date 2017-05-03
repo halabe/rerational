@@ -16,8 +16,7 @@ class AppComponent extends React.Component {
         this.state = { rat: new Rational(3,4), mat: new Matrix(3,3), matR: new Matrix(3,3) };
     }
     onClick() {
-        let matR = this.state.matR.map((rat) => rat.add(1));
-        console.log(matR.at(0,0));
+        let matR = this.state.matR.map((rat) => rat.add(new Rational(1,3)));
         this.setState({ matR:matR });
     }
     render() {
