@@ -17,7 +17,7 @@ class RationalInputComponent extends React.Component {
       if (p.length !== 3) return null;
       if (p[2] == ' ') {
         let fraction = this.rationalize(p[1]);
-        if (fraction.isWhole()) { return null; }
+        if (!fraction || fraction.isWhole()) { return null; }
         if (fraction && !isNaN(p[0])) {
           let whole = new Rational(parseInt(p[0]));
           return (whole.sign() > 0)? whole.add(fraction) : whole.sub(fraction);
@@ -40,8 +40,7 @@ class RationalInputComponent extends React.Component {
     let newValue = this.rationalize(newState.literal);
     if (newValue) { newState.value = newValue; }
     this.setState(newState);
-    //this.props.onChange(newValue);
-    console.log(newValue);
+    this.props.onChange(newValue);
   }
   render() {
     return (

@@ -16,17 +16,20 @@ class MatrixComponent extends React.Component {
   onClick(i, j) {
     this.setState({ focus:[i,j] });
   }
-  onChange() {
-
+  onChange(i, j, newValue) {
+      console.log(i + ', ' + j + ': ' + JSON.stringify(newValue));
   }
   hasFocus(i,j) {
     return this.state.focus[0]===i && this.state.focus[1]===j;
   }
   renderStatic(i,j,v) {
-      return (<div key={j} ><RationalComponent value={v} onClick={this.onClick.bind(this, i, j)} /></div>);
+      return (<div key={j}><RationalComponent value={v} onClick={this.onClick.bind(this, i, j)} /></div>);
   }
   renderEditable(i,j,v) {
-    return (<div key={j} style={{color: 'yellow'}}><RationalInputComponent value={v} onClick={this.onClick.bind(this, i, j)} onChange={this.onChange.bind(this)} /></div>);
+      return (<div key={j}><RationalInputComponent
+                value={v}
+                onClick={this.onClick.bind(this, i, j)}
+                onChange={(newValue) => this.onChange(i, j, newValue)} /></div>);
   }
   render() {
       const editable = true;//this.props.onChange !== undefined;
