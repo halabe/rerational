@@ -11,7 +11,7 @@ import Matrix from './Matrix';
 class AppComponent extends React.Component {
     constructor() {
         super();
-        let p = [ [1, 2, 8, -7], [2, -2, 4, 0], [-3, 4, -2, -5] ];
+        let p = [ [1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0] ];
         let mat = new Matrix(3,4,p);
         let matR = mat.gaussJordan();
         this.state = { mat: mat, matR: matR };
@@ -26,9 +26,10 @@ class AppComponent extends React.Component {
     render() {
         return (
             <div>
-                <p>Here&#39;s a Matrix</p>
+                <h2>Gauss Jordan</h2>
+                <p>Select a cell, and type a rational number like "-5 1/3"</p>
                 <MatrixComponent mat={ this.state.mat} onChange={this.onChange.bind(this)} />
-                <p>Here it is with Gauss-Jordan applied:</p>
+                <p>Here&#39;s that matrix with Gauss-Jordan applied:</p>
                 <MatrixComponent mat={ this.state.matR} />
             </div>
         );
