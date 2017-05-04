@@ -7,11 +7,12 @@ import React from 'react';
 import MatrixComponent from './MatrixComponent';
 
 import Matrix from './Matrix';
+import Rational from './Rational';
 
 class AppComponent extends React.Component {
     constructor() {
         super();
-        let p = [ [1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0] ];
+        let p = [ [6,2,6, new Rational(7,2)], [new Rational(3,4), new Rational(3,4), 7, 8], [1, new Rational(1,2), new Rational(7,2), 1] ];
         let mat = new Matrix(3,4,p);
         let matR = mat.gaussJordan();
         this.state = { mat: mat, matR: matR };
