@@ -4,7 +4,6 @@
 require('styles/Matrix.css');
 
 import React from 'react';
-import Matrix from './Matrix';
 import RationalComponent from './RationalComponent';
 import RationalInputComponent from './RationalInputComponent';
 
@@ -17,14 +16,6 @@ class MatrixComponent extends React.Component {
   onClick(i, j) {
     this.setState({ focus:[i,j] });
   }
-  onChange(i, j, newValue) {
-      if (newValue) {
-          let m = Matrix.fromMatrixWithValueAt(this.props.mat, i, j, newValue);
-          console.log(m);
-      } else {
-          console.log('null');
-      }
-  }
   hasFocus(i,j) {
     return this.state.focus[0]===i && this.state.focus[1]===j;
   }
@@ -35,10 +26,10 @@ class MatrixComponent extends React.Component {
       return (<div key={j}><RationalInputComponent
                 value={v}
                 onClick={this.onClick.bind(this, i, j)}
-                onChange={(newValue) => this.onChange(i, j, newValue)} /></div>);
+                onChange={(newValue) => this.props.onChange(i, j, newValue)} /></div>);
   }
   render() {
-      const editable = true;//this.props.onChange !== undefined;
+      const editable = this.props.onChange !== undefined;
       const rows = this.props.mat.rows.map((rv,i) => {
           let cols = rv.v.map((v,j) => (this.hasFocus(i,j) && editable)? this.renderEditable(i,j,v) : this.renderStatic(i,j,v));
           return <div className='row' key={i} >{cols}</div>
