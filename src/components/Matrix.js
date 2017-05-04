@@ -52,4 +52,15 @@ class Matrix {
         return new Matrix(this.r, this.c, rows);
     }
 }
+
+RationalVector.fromRVWithValueAt = function(rv, j, value) {
+    let p = rv.v.map((rat, col) => (col===j)? value : rat);
+    return new RationalVector(p);
+}
+
+Matrix.fromMatrixWithValueAt = function(m, i, j, rat) {
+    let p = m.rows.map((rv, row) => (row===i)? RationalVector.fromRVWithValueAt(rv, j, rat) : rv);
+    return new Matrix(m.r, m.c, p);
+}
+
 export default Matrix;

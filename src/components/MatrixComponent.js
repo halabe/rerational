@@ -4,6 +4,7 @@
 require('styles/Matrix.css');
 
 import React from 'react';
+import Matrix from './Matrix';
 import RationalComponent from './RationalComponent';
 import RationalInputComponent from './RationalInputComponent';
 
@@ -17,7 +18,12 @@ class MatrixComponent extends React.Component {
     this.setState({ focus:[i,j] });
   }
   onChange(i, j, newValue) {
-      console.log(i + ', ' + j + ': ' + JSON.stringify(newValue));
+      if (newValue) {
+          let m = Matrix.fromMatrixWithValueAt(this.props.mat, i, j, newValue);
+          console.log(m);
+      } else {
+          console.log('null');
+      }
   }
   hasFocus(i,j) {
     return this.state.focus[0]===i && this.state.focus[1]===j;
