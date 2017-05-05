@@ -49,7 +49,13 @@ class Matrix {
             }
             return normalized;
         });
-        return new Matrix(this.r, this.c, rows);
+        let reversedRows = rows.reverse();
+        rows = _.map(reversedRows, (row, i) => {
+            for (var bi=i+1; bi<this.rows.length; bi++) {
+                reversedRows[bi] = reversedRows[bi].zerodWith(row);
+            }
+        });
+        return new Matrix(this.r, this.c, reversedRows.reverse());
     }
 }
 
